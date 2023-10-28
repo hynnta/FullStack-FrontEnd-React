@@ -2,10 +2,12 @@ import './App.scss';
 import Login from './components/Login/Login';
 import Nav from './components/Navigation/Nav';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from './components/Register/Register';
 
 
 
-function App() {
+const App = () => {
+
   return (
     <BrowserRouter>
       <div className="app-container">
@@ -17,6 +19,7 @@ function App() {
           <Route path="/news" element={'News'} />
           <Route path="/contact" element={'Contact'} />
           <Route path="/about" element={'About'} />
+          <Route path="/register" element={<Register/>} />
           <Route path="*" element={'404 not found'} />
         
       </Routes>
