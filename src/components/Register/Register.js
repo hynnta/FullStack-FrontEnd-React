@@ -3,6 +3,7 @@ import './Register.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { registerNewUser } from '../../services/userService';
 
 const Register = (props) => {
 
@@ -20,13 +21,18 @@ const Register = (props) => {
     };
     const [isValid, setIsValid] = useState(defaultValid);
 
-    const handleRegister = () => { 
+    const handleRegister = async () => { 
         let check = isValidate();
 
         if (check === true) { 
-            axios.post('http://localhost:8080/api/v1/register', {
-            email, username, phone, password
-        })
+            let response = await registerNewUser(email, username, phone, password);
+            console.log('check response: ', response.data)
+            if (response.data.EC === 0) {
+                toast.success(response.data.EM)
+                navigate('/login')
+            } else { 
+                toast.error(response.data.EM)
+            }
         }
         
     }
