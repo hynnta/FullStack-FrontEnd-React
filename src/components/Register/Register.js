@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Register.scss'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { registerNewUser } from '../../services/userService';

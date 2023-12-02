@@ -5,18 +5,32 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from './components/Register/Register';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Users from './components/ManageUsers/Users';
+import _ from 'lodash';
+import { useEffect, useState } from 'react';
 
 const App = () => {
+  const [account, setAccount] = useState({});
+
+  useEffect(() => { 
+    let session = sessionStorage.getItem('account');
+    if (session) { 
+      setAccount(JSON.parse(session));
+    }
+  }, [])
 
   return (
     <BrowserRouter>
       <div className="app-container">
-        <Nav/>
+        { account && !_.isEmpty(account) && account.isAuthenticated
+          && <Nav/>
+        }
+        
         <Routes>
         
           <Route exact path="/" element={'Home'} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/news" element={'News'} />
           <Route path="/contact" element={'Contact'} />
           <Route path="/about" element={'About'} />
