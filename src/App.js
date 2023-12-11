@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Users from './components/ManageUsers/Users';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
+import AppRoutes from './Routes/AppRoutes';
 
 const App = () => {
   const [account, setAccount] = useState({});
@@ -26,18 +27,7 @@ const App = () => {
           && <Nav/>
         }
         
-        <Routes>
-        
-          <Route exact path="/" element={'Home'} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/news" element={'News'} />
-          <Route path="/contact" element={'Contact'} />
-          <Route path="/about" element={'About'} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="*" element={'404 not found'} />
-        
-      </Routes>
+        <AppRoutes/>
       </div>
       <ToastContainer
         position="top-right"

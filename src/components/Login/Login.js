@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Login.scss'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Toast } from 'bootstrap';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -14,7 +14,8 @@ const Login = (props) => {
         isValidInput: true,
         isValidPassword: true,
     };
-    const [validLogin, setValidLogin] = useState(defaultValid)
+    const [validLogin, setValidLogin] = useState(defaultValid);
+    const [showNav, setShowNav] = useState(true);
     let navigate = useNavigate();
     const handleRegister = () => { 
         navigate("/register");
@@ -57,7 +58,18 @@ const Login = (props) => {
         }
     }
 
+    useEffect(() => { 
+            let session = sessionStorage.getItem('account');
+            if (session) { 
+                setShowNav(false)
+                navigate('/')
+        }
+        
+    }, [])
+
     return (
+        <>
+            {showNav === true &&
         <div className='login-container mt-3'>
             <div className='container'>
                 <div className='row'>
@@ -91,7 +103,9 @@ const Login = (props) => {
                     <div className='col-2'></div>
                 </div>
             </div>
-        </div>
+                </div>
+            }
+            </>
     );
 }
 
